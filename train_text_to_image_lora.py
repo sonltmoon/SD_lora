@@ -803,7 +803,7 @@ def main():
                 noisy_latents = noise_scheduler.add_noise(latents, noise, timesteps)
 
                 # Get the text embedding for conditioning
-                encoder_hidden_states = torch.zeros((args.train_batch_size, 768), device=latents.device)
+                encoder_hidden_states = torch.zeros((args.train_batch_size, 1, 768), device=latents.device)
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
