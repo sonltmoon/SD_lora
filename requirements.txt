@@ -6,5 +6,4 @@ ftfy
 tensorboard
 Jinja2
 peft
-diffusers[torch]
 wandb
