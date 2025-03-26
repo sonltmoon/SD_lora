@@ -7,3 +7,6 @@ tensorboard
 Jinja2
 peft
 wandb
+xformers
+bitsandbytes
+# !uv pip install git+https://github.com/huggingface/diffusers.git
