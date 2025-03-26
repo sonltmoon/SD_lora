@@ -40,22 +40,19 @@ from peft import LoraConfig
 from peft.utils import get_peft_model_state_dict
 from torchvision import transforms
 from tqdm.auto import tqdm
-from transformers import CLIPTextModel, CLIPTokenizer
+from transformers import CLIPTokenizer
 
 import diffusers
 from diffusers import AutoencoderKL, DDPMScheduler, DiffusionPipeline, StableDiffusionPipeline, SD3Transformer2DModel, UNet2DConditionModel
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import cast_training_params, compute_snr
-from diffusers.utils import check_min_version, convert_state_dict_to_diffusers, is_wandb_available
+from diffusers.utils import convert_state_dict_to_diffusers, is_wandb_available
 from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
 from diffusers.utils.import_utils import is_xformers_available
 from diffusers.utils.torch_utils import is_compiled_module
 
 if is_wandb_available():
     import wandb
-
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-# check_min_version("0.33.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
 
@@ -495,8 +492,11 @@ def main():
     vae = AutoencoderKL.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="vae", revision=args.revision, variant=args.variant
     )
-    unet = UNet2DConditionModel.from_pretrained(
-        args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
+    # unet = UNet2DConditionModel.from_pretrained(
+    #     args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
+    # )
+    unet = SD3Transformer2DModel.from_pretrained(
+        args.pretrained_model_name_or_path, subfolder="transformers", revision=args.revision, variant=args.variant
     )
     # freeze parameters of models to save more memory
     unet.requires_grad_(False)
