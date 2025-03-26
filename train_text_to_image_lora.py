@@ -496,7 +496,7 @@ def main():
     #     args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
     # )
     unet = SD3Transformer2DModel.from_pretrained(
-        args.pretrained_model_name_or_path, subfolder="transformers", revision=args.revision, variant=args.variant
+        args.pretrained_model_name_or_path, subfolder="transformer", revision=args.revision, variant=args.variant
     )
     # freeze parameters of models to save more memory
     unet.requires_grad_(False)
