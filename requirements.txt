@@ -7,3 +7,5 @@ tensorboard
 Jinja2
 peft
 diffusers[torch]
+bitsandbytes
+xformers
